@@ -30,7 +30,7 @@ const NavigationBar = ({store, actions}) => {
         <NavDropdown title="Giriş Yap" id="basic-nav-dropdown">
           <NavDropdown.Item href="/login">Giriş Yap</NavDropdown.Item>
           <NavDropdown.Divider />
-          <NavDropdown.Item href="#action/3.2">Kayıt Ol</NavDropdown.Item>
+          <NavDropdown.Item href="/register">Kayıt Ol</NavDropdown.Item>
         </NavDropdown>
       )}
       </Nav>

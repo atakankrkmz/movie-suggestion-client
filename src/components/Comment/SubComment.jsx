@@ -15,7 +15,7 @@ export default class SubComments extends Component {
             <div>
                 {subCommentArray.map((com) => {
                     return (
-                        <div className="ml-5 p-2">
+                        <div className="ml-5 p-1">
                             <Row key={com.id}>
                                 <h5>{com.username}</h5>
                             </Row>

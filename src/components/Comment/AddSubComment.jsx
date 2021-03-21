@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { Form, Button, Toast } from "react-bootstrap";
 import withState from "../../utils/withState.js";
 
-class AddComment extends Component {
-    _isMounted = false;
+class AddSubComment extends Component {
     constructor(props) {
         super(props);
         this.onChangeComment = this.onChangeComment.bind(this);
@@ -19,16 +18,12 @@ class AddComment extends Component {
         this.setState({ comment: "", sent: false });
     };
 
-    componentWillUnmount() {
-    this._isMounted = false;
-  }
-
     async handleSubmit(e) {
         e.preventDefault();
 
         let text = this.state.comment;
         let movieId = this.props.movieid;
-        let subCommentOf = this.props.commentId || 0;
+        let subCommentOf = this.props.commentId;
 
         const newComment = {
             text,
@@ -58,7 +53,11 @@ class AddComment extends Component {
 
     render() {
         return (
-            <Form onSubmit={this.handleSubmit} className="mb-3">
+            <Form
+                key={this.props.movieId}
+                onSubmit={this.handleSubmit}
+                className="mb-5"
+            >
                 <Toast
                     onClose={this.setShow}
                     show={this.state.sent}
@@ -73,22 +72,23 @@ class AddComment extends Component {
                         yayına alınacaktır.
                     </Toast.Body>
                 </Toast>
-                <Form.Group controlId="exampleForm.ControlTextarea1">
-                    <Form.Label>Yorumunuz</Form.Label>
-                    <Form.Control
-                        type="text"
-                        onChange={this.onChangeComment}
-                        value={this.state.comment}
-                        placeholder="Yorumunuzu bu alana giriniz..."
-                        as="textarea"
-                        rows={2}
-                    />
+                <Form.Label>Yorum Ekle</Form.Label>
+                <Form.Group>
+                    <Form.Row className="my-2">
+                        <Col>
+                            <Form.Control
+                                type="text"
+                                placeholder="Üstteki yoruma cevap vermek için bu alanı doldurunuz..."
+                            />
+                        </Col>
+
+                        <Button type="submit" className="mr-3">
+                            Gönder
+                        </Button>
+                    </Form.Row>
                 </Form.Group>
-                <Button variant="primary" type="submit">
-                    Yorum Yap
-                </Button>
             </Form>
         );
     }
 }
-export default withState(AddComment);
+export default withState(AddSubComment);

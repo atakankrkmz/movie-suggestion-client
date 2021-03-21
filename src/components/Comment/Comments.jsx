@@ -32,24 +32,24 @@ export default class Comments extends Component {
                 {commentArray.map((comment) => {
                     if (comment.subCommentOf === 0) {
                         return (
-                            <div  key={uuidv4()}>
-                            <Card className="m-3" key={comment.id}>
-                                <Card.Header>{comment.username}</Card.Header>
-                                <Card.Body>
-                                    <p>{comment.text}</p>
-                                </Card.Body>
-                                <SubComments
-                                    key={uuidv4()}
-                                    commentId={comment.id}
-                                />
-                            </Card>
+                            <div key={uuidv4()}>
+                                <Card className="m-2" key={comment.id}>
+                                    <Card.Header>
+                                        {comment.username}
+                                    </Card.Header>
+                                    <Card.Body>
+                                        <p>{comment.text}</p>
+                                    </Card.Body>
+                                    <SubComments
+                                        commentId={comment.id}
+                                        movieId={this.state.movieId}
+                                    />
+                                </Card>
                             </div>
                         );
                     }
-                    return(<div></div>)
-                }
-
-                )}
+                    return <div></div>;
+                })}
             </div>
         );
     }

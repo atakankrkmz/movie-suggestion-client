@@ -9,12 +9,14 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 /* Pages  */
-import Homepage from "./components/pages/Homepage/index.jsx";
-import Contactpage from "./components/pages/Contactpage/index.jsx";
-import MovieDetailpage from "./components/pages/MovieDetailpage/index.jsx";
-import NotFound from "./components/pages/NotFound/index.jsx";
-import Profilepage from "./components/pages/Profilepage/index.jsx";
-import Login from "./components/pages/Loginpage/index.jsx";
+import Homepage from "./components/pages/Homepage/";
+import Contactpage from "./components/pages/Contactpage/";
+import MovieDetailpage from "./components/pages/MovieDetailpage/";
+import NotFound from "./components/pages/NotFound/";
+import Profilepage from "./components/pages/Profilepage/";
+import Login from "./components/pages/Loginpage/";
+import Register from "./components/pages/Registerpage";
+
 /* UI */
 import NavigationBar from "./components/ui/NavigationBar.js";
 
@@ -36,26 +38,33 @@ class App extends Component {
             store: { isLoggedIn },
         } = this.props;
         return (
-                <div>
-                    <NavigationBar />
-                    <Switch>
-                        <Route exact path="/" component={Homepage} />
-                        <Route path="/contact" component={Contactpage} />
-                        <PrivateRoute path="/profile" component={Profilepage} />
-                        <Route path="/movie/:id" component={MovieDetailpage} />
-                        <Route
-                            path="/login"
-                            render={() =>
-                                isLoggedIn ? (
-                                    <Redirect to="/profile" />
-                                ) : (
-                                    <Login />
-                                )
-                            }
-                        />
-                        <NotFound />
-                    </Switch>
-                </div>
+            <div>
+                <NavigationBar />
+                <Switch>
+                    <Route exact path="/" component={Homepage} />
+                    <Route path="/contact" component={Contactpage} />
+                    <PrivateRoute path="/profile" component={Profilepage} />
+                    <Route path="/movie/:id" component={MovieDetailpage} />
+                    <Route
+                        path="/login"
+                        render={() =>
+                            isLoggedIn ? <Redirect to="/profile" /> : <Login />
+                        }
+                    />
+
+                    <Route
+                        path="/register"
+                        render={() =>
+                            isLoggedIn ? (
+                                <Redirect to="/profile" />
+                            ) : (
+                                <Register />
+                            )
+                        }
+                    />
+                    <NotFound />
+                </Switch>
+            </div>
         );
     }
 }

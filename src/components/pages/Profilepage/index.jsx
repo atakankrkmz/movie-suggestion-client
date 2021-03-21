@@ -12,16 +12,16 @@ class Profilepage extends Component {
 
         return (
             <div className="dashboard">
-                <h1 className="dashboard__title">Dashboard</h1>
+                <h1 className="dashboard__title">Profil</h1>
 
                 {Object.keys(user).length > 0 ? (
                     <div className="dashboard__info">
-                        <p>Name: {user.firstname || "No name"}</p>
-                        <p>Name: {user.lastname || "No name"}</p>
-                        <p>Email: {user.email || "No email"}</p>
+                        <p>İsim: {user.firstname || "No name"}</p>
+                        <p>Soyisim: {user.lastname || "No name"}</p>
+                        <p>E-mail: {user.email || "No email"}</p>
                     </div>
                 ) : (
-                    "Loading user info..."
+                    <h3>Profil Yükleniyor</h3>
                 )}
             </div>
         );

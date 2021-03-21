@@ -4,7 +4,7 @@
 const { validateEmail } = require("./../utils/validate-email.js");
 
 const logic = {
-    _url: "https://localhost:5001/",
+    _url: process.env.API_URL || "https://localhost:5001/",
 
     /**
      *
@@ -84,6 +84,7 @@ const logic = {
     register(firstname, lastname, email, password) {
         return Promise.resolve().then(() => {
             this._validateStringField("firstname", firstname);
+            this._validateStringField("lastname", lastname);
             this._validateEmail(email);
             this._validateStringField("password", password);
 
@@ -172,7 +173,7 @@ const logic = {
         });
     },
     retrieveUser() {
-        return fetch(`${this._url}api/Auth/getbyid?id=${this._userId()}`, {
+        return fetch(`${this._url}api/User/getbyid?id=${this._userId()}`, {
             method: "GET",
             headers: {
                 "content-type": "application/json",
