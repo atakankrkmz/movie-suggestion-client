@@ -14,6 +14,7 @@ import Contactpage from "./components/pages/Contactpage/";
 import MovieDetailpage from "./components/pages/MovieDetailpage/";
 import NotFound from "./components/pages/NotFound/";
 import Profilepage from "./components/pages/Profilepage/";
+import Profilesettingspage from "./components/pages/Profilesettingspage";
 import Login from "./components/pages/Loginpage/";
 import Register from "./components/pages/Registerpage";
 
@@ -44,6 +45,7 @@ class App extends Component {
                     <Route exact path="/" component={Homepage} />
                     <Route path="/contact" component={Contactpage} />
                     <PrivateRoute path="/profile" component={Profilepage} />
+                    <PrivateRoute path="/psettings" component={Profilesettingspage} />
                     <Route path="/movie/:id" component={MovieDetailpage} />
                     <Route
                         path="/login"

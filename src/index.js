@@ -8,7 +8,7 @@ import "./index.css";
 /* Providers */
 import AuthProvider from "./providers/AuthProvider.js";
 
-import registerServiceWorker from "./registerServiceWorker.js";
+import reportWebVitals from "./reportWebVitals.js"
 
 ReactDOM.render(
     <AuthProvider>
@@ -18,4 +18,5 @@ ReactDOM.render(
     </AuthProvider>,
     document.getElementById("root")
 );
-registerServiceWorker();
+
+reportWebVitals();

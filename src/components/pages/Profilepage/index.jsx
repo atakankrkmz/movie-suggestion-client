@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 
+/* Style */
+import {Button} from "react-bootstrap";
+
 import withState from "./../../../utils/withState.js";
 
 class Profilepage extends Component {
@@ -23,6 +26,7 @@ class Profilepage extends Component {
                 ) : (
                     <h3>Profil Yükleniyor</h3>
                 )}
+                <Button href="/psettings" variant="primary">Profil ayarları</Button>
             </div>
         );
     }

@@ -20,9 +20,11 @@ class AuthProvider extends Component {
             onComment: this.onComment,
             handleChange: this.handleChange,
             onRegister: this.onRegister,
+            onUpdate: this.onUpdate,
             onLogin: this.onLogin,
             onLogout: this.onLogout,
             retrieveUser: this.retrieveUser,
+            fillStates: this.fillStates,
             clearErrors: this.clearErrors,
         };
     }
@@ -33,12 +35,12 @@ class AuthProvider extends Component {
         });
     };
 
-    onRegister = (e) => {
+    onRegister = async (e) => {
         e.preventDefault();
 
         const { firstname, lastname, email, password } = this.state;
 
-        logic
+       await logic
             .register(firstname, lastname, email, password)
             .then(() => {
                 this.setState({
@@ -52,12 +54,39 @@ class AuthProvider extends Component {
             });
     };
 
-    onLogin = (e) => {
+    onUpdate = async (e) => {
+        
+        e.preventDefault();
+
+        await logic.retrieveUser().then(user =>{
+            this.setState({
+                user
+            })
+        }).catch(err => console.log(err));
+        const {id} = this.state.user;
+
+        console.log(this.state);
+        const { firstname, lastname, email, password } = this.state;
+        
+       await logic
+            .updateUser(id, firstname, lastname, email, password)
+            .then(() => {
+                this.setState({
+                    isUpdated: true,
+                });
+            })
+            .catch(({ message }) => {
+                this.setState({
+                    error: message,
+                });
+            });
+    };
+    onLogin = async (e) => {
         e.preventDefault();
 
         const { email, password } = this.state;
 
-        logic
+       await logic
             .login(email, password)
             .then(() => {
                 this.setState({
@@ -76,24 +105,24 @@ class AuthProvider extends Component {
             });
     };
 
-    onLogout = () => {
-        logic.logout();
+    onLogout = async () => {
+       await logic.logout();
 
         this.setState({
             isLoggedIn: false,
         });
     };
 
-    retrieveUser = () => {
-        logic.retrieveUser().then((user) => {
+    retrieveUser = async () => {
+        await logic.retrieveUser().then((user) => {
             this.setState({
                 user,
             });
         });
     };
 
-    onComment = (comment) => {
-        logic.addComment(comment);
+    onComment = async (comment) => {
+       await logic.addComment(comment);
     };
 
     clearErrors = () => {
@@ -101,6 +130,19 @@ class AuthProvider extends Component {
             error: "",
         });
     };
+
+    fillStates = async () =>{
+        await logic
+            .retrieveUser().then(
+                user => {
+                    this.setState({
+                        firstname: user.firstname,
+                        lastname: user.lastname,
+                        email: user.email,
+                    })
+                }
+            ).catch(err => console.log(err));
+    }
 
     render() {
         const { children } = this.props;

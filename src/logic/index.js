@@ -109,6 +109,45 @@ const logic = {
         });
     },
 
+
+
+    /**
+     * @param {*} id
+     * @param {*} firstname
+     * @param {*} lastname
+     * @param {*} email
+     * @param {*} password
+     */
+    updateUser(id,firstname, lastname, email, password) {
+        return Promise.resolve().then(() => {
+            this._validateStringField("firstname", firstname);
+            this._validateStringField("lastname", lastname);
+            this._validateEmail(email);
+            this._validateStringField("password", password);
+
+            return fetch(`${this._url}api/Auth/update`, {
+                method: "PUT",
+                body: JSON.stringify({id, firstname, lastname, email, password }),
+                headers: {
+                    "content-type": "application/json",
+                    "Access-Control-Allow-Methods":"*",
+                },
+            })
+                .then((res) => {
+                    if (res.status === 200) {
+                        return res;
+                    }
+
+                    return res.json().then(({ message }) => {
+                        throw Error(message);
+                    });
+                })
+                .then((res) => res.json())
+                .then(() => true);
+        });
+    },
+
+
     /**
      *
      * @param {*} email
@@ -177,7 +216,6 @@ const logic = {
             method: "GET",
             headers: {
                 "content-type": "application/json",
-                authorization: `Bearer ${this._token()}`,
             },
         })
             .then((res) => {
