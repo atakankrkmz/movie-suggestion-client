@@ -21,7 +21,7 @@ export default class MovieDetailpage extends Component {
     componentDidMount = async () => {
         await axios
             .get(
-                `https://localhost:44368/api/Movies/getbyid?id=${this.props.match.params.id}`
+                `https://localhost:5001/api/Movies/getbyid?id=${this.props.match.params.id}`
             )
             .then((res) => this.setState({ movie: res.data }))
             .catch((err) => console.log(err));
@@ -42,7 +42,7 @@ export default class MovieDetailpage extends Component {
                                 alt="Movie Poster Image"
                                 src={
                                     poster
-                                        ? `https://localhost:44368/uploads/moviecontent/posters/${poster}`
+                                        ? `https://localhost:5001/uploads/moviecontent/posters/${poster}`
                                         : null
                                 }
                             />

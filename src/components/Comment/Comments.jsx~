@@ -40,14 +40,15 @@ export default class Comments extends Component {
                     if (comment.subCommentOf === 0) {
                         return (
                             <div key={uuidv4()}>
-                                <Card className="m-2" >
-                                    <Card.Header>
+                                <Card className="m-2" key={uuidv4()}>
+                                    <Card.Header key={uuidv4()}>
                                         {comment.username}
-                                    </Card.Header>
-                                    <Card.Body>
+                                    </Card.Header >
+                                    <Card.Body key={uuidv4()}>
                                         <p>{comment.text}</p>
                                     </Card.Body>
                                     <SubComments
+key={uuidv4()}
                                         commentId={comment.id}
                                         movieId={this.state.movieId}
                                     />
@@ -55,7 +56,7 @@ export default class Comments extends Component {
                             </div>
                         );
                     }
-                    return <div key={uuidv4()}></div>;
+                    return <div></div>;
                 })}
             </div>
         );

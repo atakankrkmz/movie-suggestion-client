@@ -10,7 +10,7 @@ export class MovieProvider extends Component {
 
   componentDidMount = async () => {
     const response = await axios.get(
-      "https://localhost:44368/api/Movies/getall"
+      "https://localhost:5001/api/Movies/getall"
     );
     this.setState({
       movies: response.data,

@@ -15,7 +15,7 @@ export default class Movie extends Component {
             <Card.Img
               style={{ height: "95% !important", width: "95% !important" }}
               variant="top"
-              src={`https://localhost:44368/uploads/moviecontent/posters/${poster}`}
+              src={`https://localhost:5001/uploads/moviecontent/posters/${poster}`}
             />
           </Col>
           <Col md={6}>

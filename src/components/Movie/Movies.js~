@@ -10,7 +10,7 @@ class Movies extends Component {
   };
 
   componentDidMount = async () => {
-    var response = await axios.get("https://localhost:44368/api/Genres/getall");
+    var response = await axios.get("https://localhost:5001/api/Genres/getall");
 
     let arrayState = [];
 

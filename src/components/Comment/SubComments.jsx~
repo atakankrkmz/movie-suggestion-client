@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 /* Dependencies */
 import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
 /* Components */
 import SubComment from "./SubComment.jsx";
 import AddComment from "./AddComment.jsx";

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {Link} from "react-router-dom";
 import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
 
 class Secondarybar extends Component {
     state = {
@@ -22,11 +23,10 @@ class Secondarybar extends Component {
 
         return (
             <div>
-              <h3>En son çıkan filmler</h3>
               <ol>
             {movies.map(mv => {
                 return(
-                <li key={mv.id}>
+                <li>
                     <Link to={`/movie/${mv.id}`}>{mv.name}</Link>
                     </li>
                 )
