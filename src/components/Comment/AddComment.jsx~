@@ -59,7 +59,7 @@ class AddComment extends Component {
 
     render() {
         return (
-            <Form key={uuidv4()} onSubmit={this.handleSubmit} className="mb-3">
+            <Form onSubmit={this.handleSubmit} className="mb-3">
                 <Toast
                     onClose={this.setShow}
                     show={this.state.sent}

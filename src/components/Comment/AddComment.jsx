@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Form, Button, Toast } from "react-bootstrap";
 import withState from "../../utils/withState.js";
-import { v4 as uuidv4 } from "uuid";
 
 class AddComment extends Component {
     _isMounted = false;
