@@ -14,7 +14,7 @@ class Profilepage extends Component {
         const { user } = this.props.store;
 
         return (
-            <div className="dashboard">
+            <div className="dashboard container">
                 <h1 className="dashboard__title">Profil</h1>
 
                 {Object.keys(user).length > 0 ? (

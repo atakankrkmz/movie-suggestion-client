@@ -1,39 +1,15 @@
-import React, { Component } from "react";
-import {Link} from "react-router-dom";
-import axios from "axios";
+import React from "react";
 
-class Secondarybar extends Component {
-    state = {
-        movies: [],
-    };
+/* Widgets */
+import LastReleased from "./Rightbar/LastReleased";
+import TopBoxOffice from "./Rightbar/TopBoxOffice";
 
-    componentDidMount = async () => {
-        await axios
-            .get("https://localhost:44368/api/Movies/getlastmovies?count=5")
-            .then((res) => {
-                this.setState({
-                    movies: res.data,
-                });
-            })
-            .catch((err) => console.log(err));
-    };
-    render() {
-        const {movies} = this.state;
-
-        return (
-            <div>
-              <h3>En son çıkan filmler</h3>
-              <ol>
-            {movies.map(mv => {
-                return(
-                <li key={mv.id}>
-                    <Link to={`/movie/${mv.id}`}>{mv.name}</Link>
-                    </li>
-                )
-            })}
-              </ol>
-            </div>
-        );
-    }
+function Secondarybar() {
+    return (
+        <div>
+            <LastReleased />
+            <TopBoxOffice />
+        </div>
+    );
 }
 export default Secondarybar;

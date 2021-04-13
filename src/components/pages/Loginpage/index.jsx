@@ -2,10 +2,11 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import withState from "../../../utils/withState.js";
 import { Form, Button } from "react-bootstrap";
+import "./index.css";
 
 const Login = ({ store, actions }) => {
     return (
-        <div>
+        <div className="container">
             <h3>Giriş Yap</h3>
             {store.error && <p>{store.error}</p>}
             <Form onSubmit={actions.onLogin}>
@@ -19,7 +20,7 @@ const Login = ({ store, actions }) => {
                         onChange={(e) => actions.handleChange(e)}
                     />
                     <Form.Text className="text-muted">
-                        We'll never share your email with anyone else.
+                        E-mail formatı örnek@örnek.com şeklinde olmalıdır.
                     </Form.Text>
                 </Form.Group>
 
@@ -33,6 +34,9 @@ const Login = ({ store, actions }) => {
                         onChange={(e) => actions.handleChange(e)}
                     />
                 </Form.Group>
+                <Form.Text className="text-muted" id="sifreText">
+                    Şifre minimum 8, maksimum 40 haneli olmalıdır
+                </Form.Text>
                 <Button variant="primary" type="submit">
                     Giriş
                 </Button>

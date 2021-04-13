@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 
 /* Style */
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Modal } from "react-bootstrap";
 
 import withState from "./../../../utils/withState.js";
 
@@ -10,15 +10,47 @@ class Profilesettingspage extends Component {
     constructor(props) {
         super(props);
         props.actions.fillStates();
+
+        this.state = {
+            showModal: false,
+        };
     }
+
+    saveSettings = (e) => {
+        this.displayModal();
+        this.props.actions.onUpdate(e);
+    };
+
+    displayModal = (e) => {
+        this.setState({
+            showModal: !this.state.showModal,
+        });
+    };
     render() {
         return (
-            <div className="dashboard">
+            <div className="dashboard container">
                 <h1 className="dashboard__title">Profil Ayarları</h1>
+                <Modal show={this.state.showModal} onHide={this.displayModal}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Profil Ayarları</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>Yeni profil ayarlarını kaydet.</Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={this.displayModal}>
+                            Kapat
+                        </Button>
+                        <Button
+                            variant="primary"
+                            onClick={(e) => this.saveSettings(e)}
+                        >
+                            Kaydet
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
                 {this.props.store.error && <p>{this.props.store.error}</p>}
                 {this.props.store.isLoggedIn ? (
                     <div>
-                        <Form onSubmit={this.props.actions.onUpdate}>
+                        <Form>
                             <Form.Group controlId="formBasicFistname">
                                 <Form.Label>İsim</Form.Label>
                                 <Form.Control
@@ -26,7 +58,9 @@ class Profilesettingspage extends Component {
                                     placeholder="Yeni Adınızı Giriniz"
                                     value={this.props.store.firstname}
                                     name="firstname"
-                                    onChange={(e) => this.props.actions.handleChange(e)}
+                                    onChange={(e) =>
+                                        this.props.actions.handleChange(e)
+                                    }
                                 />
                             </Form.Group>
                             <Form.Group controlId="formBasicSurname">
@@ -36,7 +70,9 @@ class Profilesettingspage extends Component {
                                     placeholder="Yeni Soyisiminizi Giriniz"
                                     value={this.props.store.lastname}
                                     name="lastname"
-                                    onChange={(e) => this.props.actions.handleChange(e)}
+                                    onChange={(e) =>
+                                        this.props.actions.handleChange(e)
+                                    }
                                 />
                             </Form.Group>
                             <Form.Group controlId="formBasicEmail">
@@ -46,7 +82,9 @@ class Profilesettingspage extends Component {
                                     placeholder="Yeni E-Mailinizi Giriniz"
                                     value={this.props.store.email}
                                     name="email"
-                                    onChange={(e) => this.props.actions.handleChange(e)}
+                                    onChange={(e) =>
+                                        this.props.actions.handleChange(e)
+                                    }
                                 />
                             </Form.Group>
 
@@ -57,11 +95,16 @@ class Profilesettingspage extends Component {
                                     placeholder="Yeni Şifrenizi Giriniz"
                                     value={this.props.store.password}
                                     name="password"
-                                    onChange={(e) => this.props.actions.handleChange(e)}
+                                    onChange={(e) =>
+                                        this.props.actions.handleChange(e)
+                                    }
                                 />
                             </Form.Group>
 
-                            <Button type="submit" variant="primary">
+                            <Button
+                                variant="primary"
+                                onClick={this.displayModal}
+                            >
                                 Uygula
                             </Button>
                         </Form>

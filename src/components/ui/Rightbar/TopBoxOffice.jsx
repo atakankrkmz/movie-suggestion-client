@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
-import { v4 as uuidv4 } from "uuid";
 
-class Secondarybar extends Component {
+class TopBoxOffice extends Component {
     state = {
         movies: [],
     };
@@ -18,22 +17,24 @@ class Secondarybar extends Component {
             })
             .catch((err) => console.log(err));
     };
+
     render() {
-        const {movies} = this.state;
+        const { movies } = this.state;
 
         return (
             <div>
-              <ol>
-            {movies.map(mv => {
-                return(
-                <li>
-                    <Link to={`/movie/${mv.id}`}>{mv.name}</Link>
-                    </li>
-                )
-            })}
-              </ol>
+                <h3>En çok gişe yapanlar</h3>
+                <ol>
+                    {movies.map((mv) => {
+                        return (
+                            <li key={mv.id}>
+                                <Link to={`/movie/${mv.id}`}>{mv.name}</Link>
+                            </li>
+                        );
+                    })}
+                </ol>
             </div>
         );
     }
 }
-export default Secondarybar;
+export default TopBoxOffice;
