@@ -8,18 +8,18 @@ import DirectorsForHomepage from "../../Director/DirectorsForHomepage.jsx";
 import { MovieProvider } from "../../../providers/MovieProvider.js";
 
 export default function Homepage() {
-    return (
-        <Row>
-            <Col md="10">
-                <MovieProvider>
-                    <Movies />
-                </MovieProvider>
-                <hr/>
-                <DirectorsForHomepage />
-            </Col>
-            <Col md="2">
-                <Secondarybar />
-            </Col>
-        </Row>
-    );
+  return (
+    <Row>
+      <Col md="10">
+        <MovieProvider>
+          <Movies />
+        </MovieProvider>
+        <hr />
+        <DirectorsForHomepage />
+      </Col>
+      <Col md="2">
+        <Secondarybar />
+      </Col>
+    </Row>
+  );
 }

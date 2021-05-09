@@ -1,15 +1,16 @@
 import React from "react";
-
-import withState from './../../utils/withState';
-
+import withState from "./../../utils/withState";
 import { Navbar, Nav, NavDropdown } from "react-bootstrap";
-const NavigationBar = ({store, actions}) => {
+
+const API_URL = process.env.REACT_APP_API_URL;
+
+const NavigationBar = ({ store, actions }) => {
   return (
     <Navbar bg="light" variant="light">
       <Navbar.Brand href="/">
         <img
           width="120px"
-          src="https://localhost:44368/ui/blue_logo_500x500.png"
+          src={`${API_URL}ui/blue_logo_500x500.png`}
           alt="otoKON"
         />
       </Navbar.Brand>
@@ -18,24 +19,24 @@ const NavigationBar = ({store, actions}) => {
         <Nav.Link href="/contact">İletişim</Nav.Link>
       </Nav>
       <Nav ml="auto">
-      {store.isLoggedIn ? (
-        
-        <NavDropdown title="Kullanıcı İşlemleri" id="basic-nav-dropdown">
-          <NavDropdown.Item href="/profile">Profil</NavDropdown.Item>
-          <NavDropdown.Divider />
-          <NavDropdown.Item onClick={actions.onLogout}>Çıkış Yap</NavDropdown.Item>
-        </NavDropdown>
-      ):(
-
-        <NavDropdown title="Giriş Yap" id="basic-nav-dropdown">
-          <NavDropdown.Item href="/login">Giriş Yap</NavDropdown.Item>
-          <NavDropdown.Divider />
-          <NavDropdown.Item href="/register">Kayıt Ol</NavDropdown.Item>
-        </NavDropdown>
-      )}
+        {store.isLoggedIn ? (
+          <NavDropdown title="Kullanıcı İşlemleri" id="basic-nav-dropdown">
+            <NavDropdown.Item href="/profile">Profil</NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item onClick={actions.onLogout}>
+              Çıkış Yap
+            </NavDropdown.Item>
+          </NavDropdown>
+        ) : (
+          <NavDropdown title="Giriş Yap" id="basic-nav-dropdown">
+            <NavDropdown.Item href="/login">Giriş Yap</NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item href="/register">Kayıt Ol</NavDropdown.Item>
+          </NavDropdown>
+        )}
       </Nav>
     </Navbar>
   );
-}
+};
 
 export default withState(NavigationBar);

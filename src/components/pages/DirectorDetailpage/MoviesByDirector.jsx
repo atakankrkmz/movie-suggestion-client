@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Movie from "../../Movie/Movie";
 import axios from "axios";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 export default class MoviesByDirector extends Component {
   _isMounted = false;
   constructor(...props) {
@@ -18,13 +20,13 @@ export default class MoviesByDirector extends Component {
   componentDidMount = async () => {
     await axios
       .get(
-        `https://localhost:44368/api/Movies/getbydirector?director_id=${this.props.match.params.id}`
+        `${API_URL}api/Movies/getbydirector?director_id=${this.props.match.params.id}`
       )
       .then((res) => this.setState({ movies: res.data }))
       .catch((err) => console.log(err));
 
     await axios
-      .get("https://localhost:44368/api/Genres/getall")
+      .get(`${API_URL}api/Genres/getall`)
       .then((res) => this.setState({ genres: res.data }))
       .catch((err) => console.log(err));
   };

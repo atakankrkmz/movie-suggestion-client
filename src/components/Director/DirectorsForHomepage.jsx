@@ -4,19 +4,19 @@ import DirectorForHomepage from "./DirectorForHomepage.jsx";
 /* Style */
 import { Row } from "react-bootstrap";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 class DirectorsForHomepage extends Component {
   state = {
     directors: [],
   };
 
   componentDidMount = async () => {
-    await axios
-      .get("https://localhost:44368/api/Directors/getall")
-      .then((res) => {
-        this.setState({
-          directors: res.data.data,
-        });
+    await axios.get(`${API_URL}api/Directors/getall`).then((res) => {
+      this.setState({
+        directors: res.data.data,
       });
+    });
   };
 
   render() {

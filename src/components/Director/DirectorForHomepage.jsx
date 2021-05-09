@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Card, Image } from "react-bootstrap";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 export default class DirectorForHomepage extends Component {
   render() {
     return (
@@ -9,7 +11,7 @@ export default class DirectorForHomepage extends Component {
         <Image
           className="rounded mx-auto  d-block"
           width={150}
-          src={`https://localhost:44368/uploads/directorcontent/posters/${this.props.director.portre}`}
+          src={`${API_URL}uploads/directorcontent/posters/${this.props.director.portre}`}
           roundedCircle
         />
 

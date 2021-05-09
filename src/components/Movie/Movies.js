@@ -4,13 +4,15 @@ import MoviesConsumer from "../../providers/MovieProvider.js";
 import axios from "axios";
 import "./Movie.css";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 class Movies extends Component {
   state = {
     genres: [],
   };
 
   componentDidMount = async () => {
-    var response = await axios.get("https://localhost:44368/api/Genres/getall");
+    var response = await axios.get(`${API_URL}api/Genres/getall`);
 
     let arrayState = [];
 

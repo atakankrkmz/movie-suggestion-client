@@ -3,6 +3,8 @@ import { Card, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./Movie.css";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 export default class Movie extends Component {
   render() {
     const { id, name, description, releaseDate, poster } = this.props.movie;
@@ -15,16 +17,18 @@ export default class Movie extends Component {
             <Card.Img
               style={{ height: "95% !important", width: "95% !important" }}
               variant="top"
-              src={`https://localhost:44368/uploads/moviecontent/posters/${poster}`}
+              src={`${API_URL}uploads/moviecontent/posters/${poster}`}
             />
           </Col>
           <Col md={6}>
             <Card.Body>
               <Link to={`/movie/${id}`}>
-                <Card.Title style={{fontSize:"4vh"}}>{name}</Card.Title>{" "}
+                <Card.Title style={{ fontSize: "4vh" }}>{name}</Card.Title>{" "}
               </Link>
 
-              <Card.Text style={{fontSize:"2vh"}}>{description.substring(0, 350) + "..."}</Card.Text>
+              <Card.Text style={{ fontSize: "2vh" }}>
+                {description.substring(0, 350) + "..."}
+              </Card.Text>
               <Link to={`/movie/${id}`}>
                 <Card.Text className="muted">Devamını gör</Card.Text>
               </Link>
