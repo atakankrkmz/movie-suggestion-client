@@ -10,14 +10,14 @@ import { MovieProvider } from "../../../providers/MovieProvider.js";
 export default function Homepage() {
   return (
     <Row>
-      <Col md="10">
+      <Col lg="9">
         <MovieProvider>
           <Movies />
         </MovieProvider>
         <hr />
         <DirectorsForHomepage />
       </Col>
-      <Col md="2">
+      <Col lg="3">
         <Secondarybar />
       </Col>
     </Row>
