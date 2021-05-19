@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext } from "react";
+import React, { createContext, useContext } from "react";
 import { Link } from "react-router-dom";
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -53,7 +53,6 @@ const Title = () => {
 
 const Subtitle = () => {
   const context = useContext(MoviecardInterface);
-  const { releaseDate, genre } = context;
 
   if (!context) {
     throw new Error("Subtitle should be called from Moviecard component");

@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { Card, Col, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import "./Movie.css";
 import "./CustomCard.css";
 import {
@@ -11,11 +9,8 @@ import {
   Subtitle,
 } from "./Moviecard";
 
-const API_URL = process.env.REACT_APP_API_URL;
-
 export default class Movie extends Component {
   render() {
-    const { id, name, description, releaseDate, poster } = this.props.movie;
     const { genre } = this.props;
 
     return (
