@@ -36,7 +36,7 @@ class Movies extends Component {
         {(value) => {
           const { movies } = value;
           return (
-            <div id="wrapper" style={{ marginLeft: 15 }}>
+            <div id="wrapper">
               {movies.map((movie) => {
                 // define variable for genreNameForProp() function
                 let gnrnm = "";
