@@ -22,7 +22,7 @@ class DirectorsForHomepage extends Component {
   render() {
     return (
       <div className="container-fluid">
-        <Row className="flex-row flex-nowrap">
+        <Row className="flex-row flex-wrap">
           {this.state.directors.map((dr) => {
             return <DirectorForHomepage key={dr.id} director={dr} />;
           })}

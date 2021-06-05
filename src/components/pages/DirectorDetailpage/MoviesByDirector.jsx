@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Movie from "../../Movie/Movie";
 import axios from "axios";
+import "./DirectorDetail.css";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
