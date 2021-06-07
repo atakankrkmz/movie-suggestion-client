@@ -14,16 +14,14 @@ class Movies extends Component {
   componentDidMount = async () => {
     var response = await axios.get(`${API_URL}api/Genres/getall`);
 
-    let arrayState = [];
+    let arrayGenre = [];
 
     response.data.forEach((genre) => {
-      //console.log(genre);
-      // console.log("model " + model);
-      arrayState.push({ id: genre.id, genreName: genre.genreName });
+      arrayGenre.push({ id: genre.id, genreName: genre.genreName });
     });
 
     this.setState({
-      genres: arrayState,
+      genres: arrayGenre,
     });
   };
 
@@ -52,9 +50,9 @@ class Movies extends Component {
                 genreNameForProp();
 
                 return (
-                  <ul>
+                  <ul key={movie.id}>
                     {" "}
-                    <Movie key={movie.id} movie={movie} genre={gnrnm} />{" "}
+                    <Movie movie={movie} genre={gnrnm} />{" "}
                   </ul>
                 );
               })}
