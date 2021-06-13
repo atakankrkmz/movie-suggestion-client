@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import Movie from "./Movie.js";
 import MoviesConsumer from "../../providers/MovieProvider.js";
 import axios from "axios";
@@ -6,61 +6,59 @@ import "./Movie.css";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-class Movies extends Component {
-  state = {
-    genres: [],
-  };
+const Movies = () => {
+  const [genres, setGenres] = useState([]);
+  const [languages, setLanguage] = useState([]);
 
-  componentDidMount = async () => {
-    var response = await axios.get(`${API_URL}api/Genres/getall`);
+  useEffect(() => {
+    axios.get(`${API_URL}api/Genres/getall`).then((res) => setGenres(res.data));
+  }, []);
 
-    let arrayGenre = [];
+  useEffect(() => {
+    axios
+      .get(`${API_URL}api/Languages/getall`)
+      .then((res) => setLanguage(res.data));
+  }, []);
 
-    response.data.forEach((genre) => {
-      arrayGenre.push({ id: genre.id, genreName: genre.genreName });
-    });
+  return (
+    <MoviesConsumer>
+      {(value) => {
+        const { movies } = value;
+        return (
+          <div id="wrapper">
+            {movies.map((movie) => {
+              // define variable for genreNameForProp() function
+              let gnrnm = "";
+              let lngnm = "";
 
-    this.setState({
-      genres: arrayGenre,
-    });
-  };
-
-  render() {
-    // getting genre table from state
-    let genreArray = this.state.genres;
-
-    return (
-      <MoviesConsumer>
-        {(value) => {
-          const { movies } = value;
-          return (
-            <div id="wrapper">
-              {movies.map((movie) => {
-                // define variable for genreNameForProp() function
-                let gnrnm = "";
-
-                // change gnrm variable with current movie's genreName
-                const genreNameForProp = () => {
-                  genreArray.map((x) =>
-                    x.id === movie.genreId ? (gnrnm = x.genreName) : null
-                  );
-                };
-
-                //run genreNameForProp() function
-                genreNameForProp();
-
-                return (
-                  <ul key={movie.id}>
-                    {" "}
-                    <Movie movie={movie} genre={gnrnm} />{" "}
-                  </ul>
+              // change gnrm variable with current movie's genreName
+              const genreNameForProp = () => {
+                genres.map((x) =>
+                  x.id === movie.genreId ? (gnrnm = x.genreName) : null
                 );
-              })}
-            </div>
-          );
-        }}
-      </MoviesConsumer>
-    );
-  }
-}
+              };
+
+              const languageNameForProp = () => {
+                languages.map((x) =>
+                  x.id === movie.languageId ? (lngnm = x.name) : null
+                );
+              };
+
+              //run genreNameForProp() function
+              genreNameForProp();
+              languageNameForProp();
+
+              return (
+                <ul key={movie.id}>
+                  {" "}
+                  <Movie movie={movie} genre={gnrnm} language={lngnm} />{" "}
+                </ul>
+              );
+            })}
+          </div>
+        );
+      }}
+    </MoviesConsumer>
+  );
+};
 export default Movies;

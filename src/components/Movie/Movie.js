@@ -11,10 +11,10 @@ import {
 
 export default class Movie extends Component {
   render() {
-    const { genre } = this.props;
+    const { genre, language } = this.props;
 
     return (
-      <Moviecard movie={this.props.movie} genre={genre}>
+      <Moviecard movie={this.props.movie} genre={genre} language={language}>
         <Container>
           <Title />
           <Subtitle />
