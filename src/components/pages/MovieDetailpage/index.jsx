@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 /* Dependencies */
 // import env from "react-dotenv";
 import axios from "axios";
@@ -11,18 +11,63 @@ import { useParams } from "react-router";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-const MovieDetailpage = (props) => {
-  const [movies, setMovies] = [];
+const MovieDetailpage = () => {
+  const [movie, setMovie] = useState({});
+  const [genres, setGenres] = useState([]);
+  const [languages, setLanguages] = useState([]);
+  const [genre, setGenre] = useState("");
+  const [language, setLanguage] = useState("");
+
   const { id } = useParams();
+
+  const implementLanguage = (languageId, languages) =>
+    languages.map((language) =>
+      language.id === languageId ? setLanguage(language.name) : null
+    );
+
+  const implementGenre = (genreId, genres) =>
+    genres.map((genre) =>
+      genre.id === genreId ? setGenre(genre.genreName) : null
+    );
+
+  useEffect(() => {
+    axios
+      .get(`${API_URL}api/Genres/getall`)
+      .then((res) => setGenres(res.data))
+      .catch((err) => console.log(err));
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get(`${API_URL}api/Languages/getall`)
+      .then((res) => {
+        setLanguages(res.data);
+        let languagejjj = "";
+        res.data.forEach((item) => {
+          if (item.id === movie.languageId) {
+            languagejjj = item.name;
+            console.log(languagejjj);
+          }
+        });
+        console.log();
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   useEffect(() => {
     axios
       .get(`${API_URL}api/Movies/getbyid?id=${id}`)
-      .then((res) => setMovies(res.data))
+      .then((res) => {
+        setMovie(res.data);
+        implementGenre(res.data.genreId, genres);
+        implementLanguage(res.data.languageId, languages);
+        console.log(genres);
+        console.log(languages);
+      })
       .catch((err) => console.log(err));
   }, []);
 
-  const { name, description, poster } = this.state.movie;
+  let { name, description, poster, releaseDate } = movie;
   return (
     <div>
       <Row>
@@ -42,14 +87,20 @@ const MovieDetailpage = (props) => {
         <Col md="7">
           <h3> {name}</h3>
           <br />
+          <h3>
+            {" "}
+            {releaseDate ? releaseDate.substring(0, 4) : 0}| {genre} |{" "}
+            {language}
+          </h3>
+          <br />
           <p>{description}</p>
         </Col>
       </Row>
       <hr />
       <Row>
         <Col className="mx-5">
-          <Comments key={uuidv4()} movieid={this.props.match.params.id} />
-          <AddComment key={uuidv4()} movieid={this.props.match.params.id} />
+          <Comments key={uuidv4()} movieid={id} />
+          <AddComment key={uuidv4()} movieid={id} />
         </Col>
       </Row>
     </div>
