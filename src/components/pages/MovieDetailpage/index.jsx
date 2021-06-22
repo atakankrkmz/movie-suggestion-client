@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 /* Dependencies */
 // import env from "react-dotenv";
 import axios from "axios";
@@ -11,18 +11,18 @@ import { useParams } from "react-router";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-const MovieDetailpage = (props) => {
-  const [movies, setMovies] = [];
+const MovieDetailpage = () => {
+  const [movie, setMovie] = useState([]);
   const { id } = useParams();
 
   useEffect(() => {
     axios
       .get(`${API_URL}api/Movies/getbyid?id=${id}`)
-      .then((res) => setMovies(res.data))
+      .then((res) => setMovie(res.data))
       .catch((err) => console.log(err));
   }, []);
 
-  const { name, description, poster } = this.state.movie;
+  let { name, description, poster } = movie;
   return (
     <div>
       <Row>
@@ -48,8 +48,8 @@ const MovieDetailpage = (props) => {
       <hr />
       <Row>
         <Col className="mx-5">
-          <Comments key={uuidv4()} movieid={this.props.match.params.id} />
-          <AddComment key={uuidv4()} movieid={this.props.match.params.id} />
+          <Comments key={uuidv4()} movieid={id} />
+          <AddComment key={uuidv4()} movieid={id} />
         </Col>
       </Row>
     </div>
