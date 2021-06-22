@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
 /* Dependencies */
-// import env from "react-dotenv";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 import { Figure, Row, Col } from "react-bootstrap";
@@ -11,16 +10,16 @@ import { useParams } from "react-router";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-const MovieDetailpage = (props) => {
+const MovieDetailpage = () => {
   const [movie, setMovie] = useState([]);
   const { id } = useParams();
 
   useEffect(() => {
     axios
       .get(`${API_URL}api/Movies/getbyid?id=${id}`)
-      .then((res) => setMovies(res.data))
+      .then((res) => setMovie(res.data))
       .catch((err) => console.log(err));
-  }, []);
+  }, [id]);
 
   let { name, description, poster } = movie;
   return (
